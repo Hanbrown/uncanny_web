@@ -5,6 +5,10 @@ import { BoxGeometry, TextureLoader } from "three";
 
 import isWebGLAvailable from "./WebGL";
 
+// Need to require all files so that Webpack knows to process them
+require("./style.css");
+require("./index.html");
+
 
 if (isWebGLAvailable) {
     console.log("Web GL Is available");

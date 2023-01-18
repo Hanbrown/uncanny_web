@@ -1,3 +1,4 @@
+// Script from Github that checks if WebGL is available
 class WebGL {
 
 	static isWebGLAvailable() {

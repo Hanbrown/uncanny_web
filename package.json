@@ -6,16 +6,17 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server --open",
-    "start": "http-server ./dist"
+    "start": "http-server ./dist -p 3000"
   },
   "author": "Pranav Rao",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.148.0",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "three": "^0.148.0"
   },
   "devDependencies": {
     "css-loader": "^6.7.3",
+    "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.75.0",
