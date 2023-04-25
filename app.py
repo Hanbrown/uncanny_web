@@ -1,4 +1,5 @@
 from flask import Flask, send_from_directory
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -17,3 +18,5 @@ def send_home():
 def send_static_file(path):
     return send_from_directory("dist", path)
 
+print("Running app on port 8080")
+serve(app, host='127.0.0.1', port=8080)
