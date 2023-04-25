@@ -121,9 +121,9 @@ def focus():
 
     # cv.imshow("Hough", img)
 
-    viv2 = math.dist(vi, v2) / 332 * 100
-    v1vi = math.dist(v1, vi) / 332 * 100
-    oivi = math.dist(c, vi) / 332 * 100
+    viv2 = np.linalg.norm(vi - v2) / 332 * 100
+    v1vi = np.linalg.norm(v1 - vi) / 332 * 100
+    oivi = np.linalg.norm(c - vi) / 332 * 100
 
     ocvi = math.sqrt(v1vi * viv2)
     f = math.sqrt((ocvi**2) - (oivi**2))
@@ -133,8 +133,8 @@ def focus():
     # Calculate Rotation Matrix
     ## First, find x, y, and z vectors
     oc = np.array((0, 0))
-    ocv1 = math.dist(oc, v1) / 332 * 100
-    ocv2 = math.dist(oc, v2) / 332 * 100
+    ocv1 = np.linalg.norm(oc - v1) / 332 * 100
+    ocv2 = np.linalg.norm(oc - v2) / 332 * 100
 
     xc = [v1[0] / ocv1, v1[1] / ocv1, f / ocv1]
     yc = [v2[0] / ocv2, v2[1] / ocv2, f / ocv2]
