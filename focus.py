@@ -82,14 +82,14 @@ def focus():
     arr = np.array(points)
     mhy = int(np.median(arr[:, 1].astype(float)))
     mhx = int(np.median(arr[:, 0].astype(float)))
-    v1 = (mhx, mhy)
+    v1 = np.array((mhx, mhy))
 
     # m -> median; g -> ground
     points = get_intersections(grounds)
     arr = np.array(points)
     mgy = int(np.median(arr[:, 1].astype(float)))
     mgx = int(np.median(arr[:, 0].astype(float)))
-    v2 = (mgx, mgy)
+    v2 = np.array((mgx, mgy))
 
     cv.circle(img, (mhx, mhy), radius = 1, color = (255, 0, 255), thickness=5)
 
@@ -101,7 +101,7 @@ def focus():
     y1 = int(img.shape[0] / 2)
     y2 = 180
 
-    c = (x1, y1)
+    c = np.array((x1, y1))
 
     # Find projection of image center on intersection line (Vi in the paper)
     x3 = mhx
@@ -113,7 +113,7 @@ def focus():
     if denom != 0:
         vix = ( (x1*y2 - y1*x2) * (x3 - x4) - (x1 - x2) * (x3*y4 - y3*x4) ) / denom
         viy = ( (x1*y2 - y1*x2) * (y3 - y4) - (y1 - y2) * (x3*y4 - y3*x4) ) / denom
-        vi = (round(vix), round(viy))
+        vi = np.array((round(vix), round(viy)))
 
 
     cv.circle(img, vi, radius = 1, color = (255, 0, 255), thickness=5)
@@ -132,7 +132,7 @@ def focus():
 
     # Calculate Rotation Matrix
     ## First, find x, y, and z vectors
-    oc = (0, 0)
+    oc = np.array((0, 0))
     ocv1 = math.dist(oc, v1) / 332 * 100
     ocv2 = math.dist(oc, v2) / 332 * 100
 
