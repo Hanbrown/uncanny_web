@@ -41,7 +41,18 @@ const boxMat = new THREE.MeshPhongMaterial({
     wireframe: false
 });
 
+// geometry.applyMatrix4([])
+let matrix = new THREE.Matrix4(
+    0.5981300006716681, 0.7921181089976145, 1.8297291093374277, 0,
+    0.9982886796694259, 0.05546048220385699, 0.2789934828672578, 0,
+    0.12043256484812515, 1.6724220326079262, -0.7633862853691145, 0,
+    0, 0, 0, 1
+)
+
 const cube = new THREE.Mesh(geometry, boxMat);
+
+cube.applyMatrix4(matrix);
+
 scene.add(cube);
 
 // Light
