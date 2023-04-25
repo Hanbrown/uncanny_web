@@ -136,7 +136,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ \"./node_modules/three/examples/jsm/controls/OrbitControls.js\");\n/* harmony import */ var _WebGL__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WebGL */ \"./src/WebGL.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n// Need to require all files so that Webpack knows to process them\r\n__webpack_require__(/*! ./style.css */ \"./src/style.css\");\r\n__webpack_require__(/*! ./index.html */ \"./src/index.html\");\r\n\r\n\r\nif (_WebGL__WEBPACK_IMPORTED_MODULE_0__[\"default\"]) {\r\n    console.log(\"Web GL Is available\");\r\n} else {\r\n    console.log(\"Web GL is not available, this application will not work\");\r\n}\r\n\r\ndocument.body.style.margin = 0;\r\n\r\nconst scene = new three__WEBPACK_IMPORTED_MODULE_1__.Scene();\r\n\r\nconst camera = new three__WEBPACK_IMPORTED_MODULE_1__.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);\r\n\r\ncamera.position.y = 2;\r\ncamera.position.z = 3;\r\n\r\n// Set size of canvas and add to index.html\r\nconst renderer = new three__WEBPACK_IMPORTED_MODULE_1__.WebGLRenderer();\r\nrenderer.setSize(window.innerWidth, window.innerHeight);\r\n\r\ndocument.body.appendChild(renderer.domElement);\r\n\r\n// Allow orbit controls for main camera\r\nnew three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__.OrbitControls(camera, renderer.domElement);\r\n\r\n// 1x1x1 Cube\r\nconst geometry = new three__WEBPACK_IMPORTED_MODULE_1__.BoxGeometry();\r\nconst boxMat = new three__WEBPACK_IMPORTED_MODULE_1__.MeshPhongMaterial({\r\n    color: 0x00ffff,\r\n    wireframe: false\r\n});\r\n\r\nconst cube = new three__WEBPACK_IMPORTED_MODULE_1__.Mesh(geometry, boxMat);\r\nscene.add(cube);\r\n\r\n// Light\r\nconst lamp = new three__WEBPACK_IMPORTED_MODULE_1__.PointLight(0xffffff, 30, 100);\r\nlamp.position.set(50, 50, 50);\r\nscene.add(lamp);\r\n\r\n// Allow canvas to be resized properly\r\nconst onWindowResize = () => {\r\n    camera.aspect = window.innerWidth / window.innerHeight;\r\n    camera.updateProjectionMatrix();\r\n    renderer.setSize(window.innerWidth / window.innerHeight);\r\n    render();\r\n};\r\n\r\nwindow.addEventListener(\"resize\", onWindowResize, false);\r\n\r\n\r\n\r\nconst render = () => {\r\n    renderer.render(scene, camera);\r\n}\r\n\r\nconst animate = () => {\r\n    requestAnimationFrame(animate);\r\n\r\n    render();\r\n}\r\n\r\nanimate();\n\n//# sourceURL=webpack://threejs/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ \"./node_modules/three/examples/jsm/controls/OrbitControls.js\");\n/* harmony import */ var _WebGL__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WebGL */ \"./src/WebGL.js\");\n/* harmony import */ var _bowling_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bowling.jpg */ \"./src/bowling.jpg\");\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n__webpack_require__(/*! ./style.css */ \"./src/style.css\");\r\n__webpack_require__(/*! ./index.html */ \"./src/index.html\");\r\n\r\n\r\nconst scene = new three__WEBPACK_IMPORTED_MODULE_2__.Scene();\r\nconst renderer = new three__WEBPACK_IMPORTED_MODULE_2__.WebGLRenderer();\r\nlet camera;\r\nconst init = (flength) => {\r\n    if (_WebGL__WEBPACK_IMPORTED_MODULE_0__[\"default\"]) console.log(\"WebGL is supported\");\r\n    else\r\n        console.warn(\r\n            \"WebGL is not supported, this page will not work as intended\"\r\n        );\r\n\r\n    camera = new three__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera(\r\n        flength, // TODO change to python result\r\n        window.innerHeight / window.innerHeight,\r\n        0.1,\r\n        100\r\n    );\r\n    camera.position.y = 2;\r\n    camera.position.z = 3;\r\n\r\n    renderer.setSize(window.innerHeight, window.innerHeight);\r\n    document.body.appendChild(renderer.domElement);\r\n\r\n    new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__.OrbitControls(camera, renderer.domElement);\r\n\r\n    const geometry = new three__WEBPACK_IMPORTED_MODULE_2__.BoxGeometry();\r\n    const material = new three__WEBPACK_IMPORTED_MODULE_2__.MeshPhongMaterial({\r\n        color: 0x00ff00,\r\n        wireframe: false,\r\n    });\r\n\r\n    const cube = new three__WEBPACK_IMPORTED_MODULE_2__.Mesh(geometry, material);\r\n    scene.add(cube);\r\n\r\n    const loader = new three__WEBPACK_IMPORTED_MODULE_2__.TextureLoader();\r\n    const bgTexture = loader.load(_bowling_jpg__WEBPACK_IMPORTED_MODULE_1__);\r\n    scene.background = bgTexture;\r\n\r\n    const lamp = new three__WEBPACK_IMPORTED_MODULE_2__.PointLight(0xffffff, 50, 100);\r\n    lamp.position.set(50, 50, 50);\r\n    scene.add(lamp);\r\n\r\n    const lamp1 = new three__WEBPACK_IMPORTED_MODULE_2__.PointLight(0xffffff, 10, 100);\r\n    lamp1.position.set(-50, 50, 50);\r\n    scene.add(lamp1);\r\n};\r\n\r\nwindow.addEventListener(\"resize\", onWindowResize, false);\r\nfunction onWindowResize() {\r\n    camera.aspect = window.innerHeight / window.innerHeight;\r\n    camera.updateProjectionMatrix();\r\n    renderer.setSize(window.innerHeight, window.innerHeight);\r\n    render();\r\n}\r\n\r\nfunction animate() {\r\n    requestAnimationFrame(animate);\r\n\r\n    render();\r\n}\r\n\r\nfunction render() {\r\n    renderer.render(scene, camera);\r\n}\r\n\r\nfetch(\"/focus\")\r\n    .then((res) => res.json())\r\n    .then((res) => {\r\n        init(res.length);\r\n        animate();\r\n    });\r\n// animate();\r\n\n\n//# sourceURL=webpack://threejs/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/bowling.jpg":
+/*!*************************!*\
+  !*** ./src/bowling.jpg ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"f3335d00e2471428deda.jpg\";\n\n//# sourceURL=webpack://threejs/./src/bowling.jpg?");
 
 /***/ }),
 
@@ -211,6 +221,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -225,6 +247,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */

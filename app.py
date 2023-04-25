@@ -1,11 +1,13 @@
 from flask import Flask, send_from_directory
+from focus import focus
 
 app = Flask(__name__)
 
 # Calculate focal length
-@app.route("/focal/<num>")
-def get_focal_length(num):
-    return str(num)
+@app.route("/focus", methods=["GET"])
+def get_focal_length():
+    result = {"length": focus()}
+    return result
 
 # Seve homepage
 @app.route("/")

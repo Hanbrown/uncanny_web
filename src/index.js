@@ -5,81 +5,79 @@ import { BoxGeometry, TextureLoader } from "three";
 
 import isWebGLAvailable from "./WebGL";
 
-// Need to require all files so that Webpack knows to process them
+import BKG_IMG from "./bowling.jpg";
+
 require("./style.css");
 require("./index.html");
 
 
-if (isWebGLAvailable) {
-    console.log("Web GL Is available");
-} else {
-    console.log("Web GL is not available, this application will not work");
-}
-
-document.body.style.margin = 0;
-
 const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
-
-camera.position.y = 2;
-camera.position.z = 3;
-
-// Set size of canvas and add to index.html
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+let camera;
+const init = (flength) => {
+    if (isWebGLAvailable) console.log("WebGL is supported");
+    else
+        console.warn(
+            "WebGL is not supported, this page will not work as intended"
+        );
 
-document.body.appendChild(renderer.domElement);
+    camera = new THREE.PerspectiveCamera(
+        flength, // TODO change to python result
+        window.innerHeight / window.innerHeight,
+        0.1,
+        100
+    );
+    camera.position.y = 2;
+    camera.position.z = 3;
 
-// Allow orbit controls for main camera
-new OrbitControls(camera, renderer.domElement);
+    renderer.setSize(window.innerHeight, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-// 1x1x1 Cube
-const geometry = new BoxGeometry();
-const boxMat = new THREE.MeshPhongMaterial({
-    color: 0x00ffff,
-    wireframe: false
-});
+    new OrbitControls(camera, renderer.domElement);
 
-// geometry.applyMatrix4([])
-let matrix = new THREE.Matrix4(
-    0.5981300006716681, 0.7921181089976145, 1.8297291093374277, 0,
-    0.9982886796694259, 0.05546048220385699, 0.2789934828672578, 0,
-    0.12043256484812515, 1.6724220326079262, -0.7633862853691145, 0,
-    0, 0, 0, 1
-)
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshPhongMaterial({
+        color: 0x00ff00,
+        wireframe: false,
+    });
 
-const cube = new THREE.Mesh(geometry, boxMat);
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-cube.applyMatrix4(matrix);
+    const loader = new THREE.TextureLoader();
+    const bgTexture = loader.load(BKG_IMG);
+    scene.background = bgTexture;
 
-scene.add(cube);
+    const lamp = new THREE.PointLight(0xffffff, 50, 100);
+    lamp.position.set(50, 50, 50);
+    scene.add(lamp);
 
-// Light
-const lamp = new THREE.PointLight(0xffffff, 30, 100);
-lamp.position.set(50, 50, 50);
-scene.add(lamp);
-
-// Allow canvas to be resized properly
-const onWindowResize = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth / window.innerHeight);
-    render();
+    const lamp1 = new THREE.PointLight(0xffffff, 10, 100);
+    lamp1.position.set(-50, 50, 50);
+    scene.add(lamp1);
 };
 
 window.addEventListener("resize", onWindowResize, false);
-
-
-
-const render = () => {
-    renderer.render(scene, camera);
+function onWindowResize() {
+    camera.aspect = window.innerHeight / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerHeight, window.innerHeight);
+    render();
 }
 
-const animate = () => {
+function animate() {
     requestAnimationFrame(animate);
 
     render();
 }
 
-animate();
+function render() {
+    renderer.render(scene, camera);
+}
+
+fetch("/focus")
+    .then((res) => res.json())
+    .then((res) => {
+        init(res.length);
+        animate();
+    });
