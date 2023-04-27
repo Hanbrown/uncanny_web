@@ -44,6 +44,10 @@ const init = (flength) => {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
+    const cube2 = new THREE.Mesh(geometry, material);
+    cube2.position.set(0, 0, -5);
+    scene.add(cube2);
+
     const loader = new THREE.TextureLoader();
     const bgTexture = loader.load(BKG_IMG);
     scene.background = bgTexture;
