@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>About</title>
+</head>
+<body>
+    <h1>About the Project</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/how">How this site works</a></li>
+    </ul>
+    <hr>
+    <article>
+        <h3>Problem Definition</h3>
+        <p>
+            3D Scene Modeling from Images
+            <br>
+            Artists want to take an image and create a 3D scene based on that photograph. Artists do not always know the focal length of the camera that took the photo they are using.
+            <br>
+            They need to know properties of the camera to understand 3D geometry of the scene. This makes it easier to use photos and videos as backgrounds.
+        </p>
+        <hr>
+        <h3>Current State of the Art</h3>
+        <p>
+            <img src="fspy1.png" alt="FSpy Demo 1" ><br>
+            FSpy is a program that allows a user to define straight lines on an image so that one or two vanishing points can be calculated.
+            These results, along with field of view, camera position and camera orientation can then be saved and uploaded to Blender to start modeling this scene!
+            <br><br>
+            <img src="vuforia.png" alt="LEGO Store demo with Vuforia"><br>
+            Superimposes 3D animal onto a still image<br>
+            Vuforia SDK performs computations<br>
+            Designed to be ran on smartphone in real-time<br>
+        </p>
+        <hr>
+        <h3>Our Goal</h3>
+        <p>
+            Given an image, can we estimate the camera properties automatically? Is there a way to skip the line labeling step required by fSpy?<br>
+            Avoids a tedious, time-consuming process for artists<br>
+            Requires human attention to detail (potential error)<br>
+        </p>
+        <hr>
+        <h3>Method</h3>
+        <ol>
+            <li>Detect edges in the image (Canny Edge Detection)</li>
+            <li>Identify lines from those edges (Hough Transform)</li>
+            <li>Estimate 2 groups of lines where all the lines in each group are parallel in the world coordinate system</li>
+            <li>Use these groups of lines to calculate two vanishing points</li>
+            <li>Calculate camera properties from the vanishing points (using the methods from <a href="https://annals-csis.org/proceedings/2012/pliks/110.pdf" target="_blank">the paper</a>)</li>
+            <li>Upload image and camera properties to Blender to begin creating the 3D scene</li>
+        </ol>
+        <hr>
+        <h3>Next Steps</h3>
+        <p>
+            We hope to develop this into a Blender Add-on. If need be, we will allow user adjustment of vanishing point detection. We will also make the algorithm more robust to different types of scenes.
+We hope to develop a better estimation for what lines are on what axes.
+        </p>
+    </article>
+</body>
+</html>

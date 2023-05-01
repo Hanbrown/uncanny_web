@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>How the Site Works</title>
+</head>
+<body>
+    <h1>How this site works</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About the project</a></li>
+    </ul>
+    <hr>
+    <article>
+        <p>
+            We use Flask as a web server. Upon loading the homepage, a request is sent to the server to analyze the bowling alley photo.
+            <br>
+            Using the equations from the <a href="https://annals-csis.org/proceedings/2012/pliks/110.pdf" target="_blank">Orghidan, Salvi, et al. paper</a>, we calculate the vanishing points and then the focal length.
+            <br>
+            We do calculate a position matrix, but we do not use it as we were not getting satisfactory results.
+            <br>
+            The server sends the focal length back as a JSON object.
+            <br>
+            A front-end JS script sets the ThreeJS camera as the focal length from the server, and the scene is rendered.
+            <br>
+            We add orbit controls so that the camera can be properly positioned and rotated within the scene.
+            <br>
+            <a href="http://github.com/Hanbrown/uncanny_web" target="_blank">Github</a>
+        </p>
+    </article>
+</body>
+</html>

@@ -9,10 +9,28 @@ def get_focal_length():
     result = {"length": focus()}
     return result
 
-# Seve homepage
+@app.route("/about")
+def send_about():
+    return send_from_directory("src", "about.html")
+
+@app.route("/how")
+def send_how():
+    return send_from_directory("src", "how_it_works.html")
+
+# Serve homepage
 @app.route("/")
 def send_home():
     return send_from_directory("dist", "index.html")
+
+# Serve image files
+@app.route("/<path>.png")
+def send_img(path):
+    return send_from_directory("src", path +".png")
+
+# Serve CSS files
+@app.route("/<path>.css")
+def send_css(path):
+    return send_from_directory("src", path +".css")
 
 # Serve all static files
 @app.route("/<path:path>")

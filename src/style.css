@@ -3,6 +3,28 @@ body {
     color: whitesmoke;
 }
 
-h1, h3 {
+h1, h3, a, p, li {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul li {
+    display: inline; 
+    list-style-type: none;
+}
+
+a {
+    color: orange;
+}
+
+ul li a {    
+    padding: 1.5rem;
+}
+
+article {
+    width: 60%;
+    margin-left: 20%;
+}
+
+p, li {
+    line-height: 2rem;
 }

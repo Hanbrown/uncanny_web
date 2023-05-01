@@ -31,7 +31,7 @@ const init = (flength) => {
     camera.position.z = 3;
 
     renderer.setSize(window.innerHeight, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    document.querySelector("#container").appendChild(renderer.domElement);
 
     new OrbitControls(camera, renderer.domElement);
 
